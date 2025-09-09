@@ -1,4 +1,45 @@
-❯ kubectl -n kube-system get configmap aws-auth -o yaml | grep -A3 RBAC_SCOP_MEMBER
-
-An error occurred (AccessDenied) when calling the AssumeRole operation: User: arn:aws:sts::833376745199:assumed-role/RBAC_SCOP_MEMBER/daya.8 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins
-Unable to connect to the server: getting credentials: exec: executable aws failed with exit code 254
+ kubectl -n kube-system get configmap aws-auth -o yaml
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::833376745199:role/PRD-EKS-WORKERS-NodeInstanceRole-1AWQHV57AAVK3
+      username: system:node:{{EC2PrivateDNSName}}
+    - groups:
+      - system:masters
+      rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins
+      username: system:node:{{SessionName}}
+    - groups:
+      - eksreadwritegroup
+      rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ReadWrite
+      username: system:node:{{SessionName}}
+    - groups:
+      - eksreadgroup
+      rolearn: arn:aws:iam::833376745199:role/PRD-EKS-Read
+      username: system:node:{{SessionName}}
+    - groups:
+      - sensu-monitor
+      rolearn: arn:aws:iam::833376745199:role/PRD-SENSU-IAM-APIAssociateNodeIAMRole-1G7EO32FXQKAJ
+      username: system:node:{{EC2PrivateDNSName}}
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::833376745199:role/PRD-EKS-SPARK-NODE-ROLE
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - userarn: arn:aws:iam::833376745199:user/sensu-go
+      username: sensu-go
+      groups:
+        - system:masters
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"mapRoles":"- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::833376745199:role/PRD-EKS-WORKERS-NodeInstanceRole-1AWQHV57AAVK3\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:masters\n  rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins\n  username: system:node:{{SessionName}}\n- groups:\n  - eksreadwritegroup\n  rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ReadWrite\n  username: system:node:{{SessionName}}\n- groups:\n  - eksreadgroup\n  rolearn: arn:aws:iam::833376745199:role/PRD-EKS-Read\n  username: system:node:{{SessionName}}\n- groups:\n  - sensu-monitor\n  rolearn: arn:aws:iam::833376745199:role/PRD-SENSU-IAM-APIAssociateNodeIAMRole-1G7EO32FXQKAJ\n  username: system:node:{{EC2PrivateDNSName}}\n- groups:\n  - system:bootstrappers\n  - system:nodes\n  rolearn: arn:aws:iam::833376745199:role/PRD-EKS-WORKERS-117-NodeInstanceRole-1JF1W9NBZQKOU\n  username: system:node:{{EC2PrivateDNSName}}\n","mapUsers":"- userarn: arn:aws:iam::833376745199:user/sensu-go\n  username: sensu-go\n  groups:\n    - system:masters\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"aws-auth","namespace":"kube-system"}}
+  creationTimestamp: "2022-08-09T12:23:21Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "799460599"
+  uid: c31af7f2-6ac6-4c19-9913-fa0182f3538a
