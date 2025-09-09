@@ -1,0 +1,5 @@
+{
+    "UserId": "AROA4ECI763XXQNUM3MRP:daya.8",
+    "Account": "833376745199",
+    "Arn": "arn:aws:sts::833376745199:assumed-role/RBAC_SCOP_PRD_DEVOPS/daya.8"
+}
