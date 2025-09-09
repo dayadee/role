@@ -1,43 +1,4 @@
-kubectl -n kube-system get configmap aws-auth -o yaml
-apiVersion: v1
-data:
-  mapRoles: |
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ACRLI-NODE-ROLE-AP2-NodeInstanceRole-XKkqz3lTdIqA
-      username: system:node:{{EC2PrivateDNSName}}
-      groups:
-        - system:bootstrappers
-        - system:nodes
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS
-      username: system:node:{{SessionName}}
-      groups:
-        - eksreadwritegroup
-        - eksemreadwritegroup-acrli
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-Read
-      username: system:node:{{SessionName}}
-      groups:
-        - eksreadgroup
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ReadWrite
-      username: system:node:{{SessionName}}
-      groups:
-        - eksreadwritegroup
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins
-      username: system:node:{{SessionName}}
-      groups:
-        - system:masters
-kind: ConfigMap
-metadata:
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","data":{"mapRoles":"- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ACRLI-NODE-ROLE-AP2-NodeInstanceRole-XKkqz3lTdIqA\n  username: system:node:{{EC2PrivateDNSName}}\n  groups:\n    - system:bootstrappers\n    - system:nodes\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS\n  username: system:node:{{SessionName}}\n  groups:\n    - eksreadwritegroup\n    - eksemreadwritegroup-acrli\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-Read\n  username: system:node:{{SessionName}}\n  groups:\n    - eksreadgroup\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ReadWrite\n  username: system:node:{{SessionName}}\n  groups:\n    - eksreadwritegroup\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins\n  username: system:node:{{SessionName}}\n  groups:\n    - system:masters\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"aws-auth","namespace":"kube-system"}}
-  creationTimestamp: "2023-10-18T18:28:52Z"
-  name: aws-auth
-  namespace: kube-system
-  resourceVersion: "235313535"
-  uid: 29fc8d15-0379-485a-afc3-dce701543464
-❯ kubectl -n kube-system get configmap aws-auth -o yaml | grep rolearn
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ACRLI-NODE-ROLE-AP2-NodeInstanceRole-XKkqz3lTdIqA
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-Read
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ReadWrite
-    - rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins
-      {"apiVersion":"v1","data":{"mapRoles":"- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ACRLI-NODE-ROLE-AP2-NodeInstanceRole-XKkqz3lTdIqA\n  username: system:node:{{EC2PrivateDNSName}}\n  groups:\n    - system:bootstrappers\n    - system:nodes\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS\n  username: system:node:{{SessionName}}\n  groups:\n    - eksreadwritegroup\n    - eksemreadwritegroup-acrli\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-Read\n  username: system:node:{{SessionName}}\n  groups:\n    - eksreadgroup\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ReadWrite\n  username: system:node:{{SessionName}}\n  groups:\n    - eksreadwritegroup\n- rolearn: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins\n  username: system:node:{{SessionName}}\n  groups:\n    - system:masters\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"aws-auth","namespace":"kube-system"}}
+❯ kubectl -n kube-system get configmap aws-auth -o yaml | grep -A3 RBAC_SCOP_MEMBER
+
+An error occurred (AccessDenied) when calling the AssumeRole operation: User: arn:aws:sts::833376745199:assumed-role/RBAC_SCOP_MEMBER/daya.8 is not authorized to perform: sts:AssumeRole on resource: arn:aws:iam::833376745199:role/PRD-EKS-ClusterAdmins
+Unable to connect to the server: getting credentials: exec: executable aws failed with exit code 254
