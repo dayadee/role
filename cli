@@ -1,0 +1,3 @@
+❯ aws iam list-roles --query "Roles[?AssumeRolePolicyDocument.Statement[?Effect=='Allow' && contains(Principal.AWS, 'arn:aws:iam::833376745199:role/RBAC_SCOP_PRD_DEVOPS')]]" --profile scop
+
+In function contains(), invalid type for value: None, expected one of: ['array', 'string'], received: "null"
