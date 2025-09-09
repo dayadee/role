@@ -1,0 +1,26 @@
+Description
+
+Objective: HQ Platform team have suggested not to use custom RBAC role - RBAC_SCOP_PRD_DEVELOPER and use only RBAC_SCOP_MEMBER/RBAC_SCOP_PL role. However, there are privilege permission which are mapped to RBAC_SCOP_PRD_DEVELOPER, will need to make sure same permissions are mapped with RBAC_SCOP_MEMBER which will be used going forward. Some of these permissions are - port forwarding, perform exec into the pods.
+
+Context: Will remove any dependency on the custom roles - RBAC_SCOP_PRD_DEVELOPER.
+
+Scope: Grant same set of permission to RBAC_SCOP_MEMBER which RBAC_SCOP_PRD_DEVELOPER have.
+
+Approach:
+
+Reachout the engineering team for all the permissions required on the RBAC_SCOP_MEMBER role. Including - port forwarding and performing exec
+
+Modify the policies on the EKS cluster to grant these permissions to the respective roles.
+
+Validate the changes and also let engineering team to validate.
+
+Acceptance criteria/DOD:
+
+RBAC_SCOP_MEMBER perform all the operations which are possible with the RBAC_SCOP_PRD_DEVELOPER on the cluster.
+
+Changes are validated by the engineering team.
+
+
+Dependencies\Blockers: Engineering team to provide the permission which are required. Need to determine if the permission changes need to be done at cluster level or AWS level.
+Risks & Mitigation: N/A
+References: N/A
