@@ -1,0 +1,1007 @@
+apiVersion: v1
+items:
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2023-02-09T00:40:06Z"
+    name: argocd-manager-role-binding
+    resourceVersion: "42778013"
+    uid: 820b3c2f-1597-4628-9c12-7ed75a891439
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: argocd-manager-role
+  subjects:
+  - kind: ServiceAccount
+    name: argocd-manager
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"alb-controller-na-spark","app.kubernetes.io/name":"aws-load-balancer-controller"},"name":"aws-load-balancer-controller-rolebinding"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"aws-load-balancer-controller-role"},"subjects":[{"kind":"ServiceAccount","name":"aws-load-balancer-controller","namespace":"kube-system"}]}
+    creationTimestamp: "2023-02-09T02:43:36Z"
+    labels:
+      app.kubernetes.io/instance: alb-controller-na-spark
+      app.kubernetes.io/name: aws-load-balancer-controller
+    name: aws-load-balancer-controller-rolebinding
+    resourceVersion: "42808133"
+    uid: 540c7a9d-4702-477d-9a46-7a2aed4249b7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: aws-load-balancer-controller-role
+  subjects:
+  - kind: ServiceAccount
+    name: aws-load-balancer-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2024-08-22T06:42:38Z"
+    labels:
+      app.kubernetes.io/instance: aws-vpc-cni
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: aws-node
+      app.kubernetes.io/version: v1.19.3
+      helm.sh/chart: aws-vpc-cni-1.19.3
+      k8s-app: aws-node
+    name: aws-node
+    resourceVersion: "829456109"
+    uid: 1b1599fe-0a13-41ec-919b-d9db0c88ced3
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: aws-node
+  subjects:
+  - kind: ServiceAccount
+    name: aws-node
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cainjector","app.kubernetes.io/component":"cainjector","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cainjector","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-cainjector"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-cainjector"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager-cainjector","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cainjector
+      app.kubernetes.io/component: cainjector
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cainjector
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-cainjector
+    resourceVersion: "623209487"
+    uid: 5fa1d145-4da2-49f5-a482-dc6985ba6086
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-cainjector
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager-cainjector
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"cert-manager","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-approve:cert-manager-io"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-approve:cert-manager-io"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: cert-manager
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-approve:cert-manager-io
+    resourceVersion: "623209484"
+    uid: 38885a88-ec74-4532-9bc7-3e4a63e982e2
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-approve:cert-manager-io
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-certificates"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-certificates"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-certificates
+    resourceVersion: "623209483"
+    uid: f2d9a07e-cb07-4c28-941a-eea25109b8da
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-certificates
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"cert-manager","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-certificatesigningrequests"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-certificatesigningrequests"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: cert-manager
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-certificatesigningrequests
+    resourceVersion: "623209490"
+    uid: 99d15083-c7e3-442c-852e-7035dd049873
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-certificatesigningrequests
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-challenges"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-challenges"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-challenges
+    resourceVersion: "623209488"
+    uid: c1df5863-b87f-49bc-ac67-7b25c28c2d5d
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-challenges
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-clusterissuers"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-clusterissuers"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-clusterissuers
+    resourceVersion: "623209492"
+    uid: 8e3b8b75-aa8c-4ab9-abfa-4dd200be6035
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-clusterissuers
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-ingress-shim"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-ingress-shim"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-ingress-shim
+    resourceVersion: "623209485"
+    uid: 8018bb81-fe0a-44ba-a93e-88aec044ae9f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-ingress-shim
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-issuers"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-issuers"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-issuers
+    resourceVersion: "623209486"
+    uid: 4d4a47b5-a663-4243-9a77-7ab152fdb133
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-issuers
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"cert-manager","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-controller-orders"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-controller-orders"},"subjects":[{"kind":"ServiceAccount","name":"cert-manager","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: cert-manager
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-controller-orders
+    resourceVersion: "623209491"
+    uid: 9048024f-75fd-4114-8f6b-69d22dd4a098
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-controller-orders
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app":"webhook","app.kubernetes.io/component":"webhook","app.kubernetes.io/instance":"certificate-manager-na-spark","app.kubernetes.io/name":"webhook","app.kubernetes.io/version":"v1.15.3"},"name":"cert-manager-webhook:subjectaccessreviews"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cert-manager-webhook:subjectaccessreviews"},"subjects":[{"apiGroup":"","kind":"ServiceAccount","name":"cert-manager-webhook","namespace":"cert-manager"}]}
+    creationTimestamp: "2023-02-09T02:14:41Z"
+    labels:
+      app: webhook
+      app.kubernetes.io/component: webhook
+      app.kubernetes.io/instance: certificate-manager-na-spark
+      app.kubernetes.io/name: webhook
+      app.kubernetes.io/version: v1.15.3
+    name: cert-manager-webhook:subjectaccessreviews
+    resourceVersion: "623209489"
+    uid: 965c02f6-3147-4a3a-b5cf-2415f1b64ad4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cert-manager-webhook:subjectaccessreviews
+  subjects:
+  - kind: ServiceAccount
+    name: cert-manager-webhook
+    namespace: cert-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"cloudwatch-agent-role-binding"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cloudwatch-agent-role"},"subjects":[{"kind":"ServiceAccount","name":"cloudwatch-agent","namespace":"amazon-cloudwatch"}]}
+    creationTimestamp: "2023-02-25T00:54:29Z"
+    name: cloudwatch-agent-role-binding
+    resourceVersion: "55361505"
+    uid: 3768d385-767a-4b1e-b303-16f593b9dabd
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cloudwatch-agent-role
+  subjects:
+  - kind: ServiceAccount
+    name: cloudwatch-agent
+    namespace: amazon-cloudwatch
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      rbac.authorization.kubernetes.io/autoupdate: "true"
+    creationTimestamp: "2022-08-09T11:46:51Z"
+    labels:
+      kubernetes.io/bootstrapping: rbac-defaults
+    name: cluster-admin
+    resourceVersion: "148"
+    uid: 5664a392-cbcc-44b1-b845-f766bcde8c1a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:masters
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-24T08:04:44Z"
+    labels:
+      app.kubernetes.io/component: csi-driver
+      app.kubernetes.io/managed-by: EKS
+      app.kubernetes.io/name: aws-ebs-csi-driver
+      app.kubernetes.io/version: 1.33.0
+    name: ebs-csi-attacher-binding
+    resourceVersion: "618136954"
+    uid: 0a726cd2-151e-4c39-bba1-56d628645fe7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: ebs-external-attacher-role
+  subjects:
+  - kind: ServiceAccount
+    name: ebs-csi-controller-sa
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-24T08:04:44Z"
+    labels:
+      app.kubernetes.io/component: csi-driver
+      app.kubernetes.io/managed-by: EKS
+      app.kubernetes.io/name: aws-ebs-csi-driver
+      app.kubernetes.io/version: 1.33.0
+    name: ebs-csi-node-getter-binding
+    resourceVersion: "618136965"
+    uid: 3628d073-11eb-413f-91e2-28d1f24a2b67
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: ebs-csi-node-role
+  subjects:
+  - kind: ServiceAccount
+    name: ebs-csi-node-sa
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-24T08:04:44Z"
+    labels:
+      app.kubernetes.io/component: csi-driver
+      app.kubernetes.io/managed-by: EKS
+      app.kubernetes.io/name: aws-ebs-csi-driver
+      app.kubernetes.io/version: 1.33.0
+    name: ebs-csi-provisioner-binding
+    resourceVersion: "618136968"
+    uid: e19136f3-32f5-4e37-8bd4-5debc9b963c3
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: ebs-external-provisioner-role
+  subjects:
+  - kind: ServiceAccount
+    name: ebs-csi-controller-sa
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-24T08:04:44Z"
+    labels:
+      app.kubernetes.io/component: csi-driver
+      app.kubernetes.io/managed-by: EKS
+      app.kubernetes.io/name: aws-ebs-csi-driver
+      app.kubernetes.io/version: 1.33.0
+    name: ebs-csi-resizer-binding
+    resourceVersion: "618136970"
+    uid: 0822581d-8073-4bb9-a0a8-a4f4731839e0
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: ebs-external-resizer-role
+  subjects:
+  - kind: ServiceAccount
+    name: ebs-csi-controller-sa
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-24T08:04:44Z"
+    labels:
+      app.kubernetes.io/component: csi-driver
+      app.kubernetes.io/managed-by: EKS
+      app.kubernetes.io/name: aws-ebs-csi-driver
+      app.kubernetes.io/version: 1.33.0
+    name: ebs-csi-snapshotter-binding
+    resourceVersion: "618136976"
+    uid: ad8d5bcf-2957-4b83-bd55-7c59dc5cc8f3
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: ebs-external-snapshotter-role
+  subjects:
+  - kind: ServiceAccount
+    name: ebs-csi-controller-sa
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:addon-cluster-admin"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"cluster-admin"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:addon-manager"}]}
+    creationTimestamp: "2022-12-22T14:16:48Z"
+    name: eks:addon-cluster-admin
+    resourceVersion: "30265757"
+    uid: c1854664-f826-47c2-993d-f41511f05808
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: cluster-admin
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:addon-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:addon-manager"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:addon-manager"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:addon-manager"}]}
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    name: eks:addon-manager
+    resourceVersion: "262"
+    uid: 036a4043-ba1b-4fdd-8409-c421b5e36c4c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:addon-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:addon-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2023-05-21T12:31:27Z"
+    name: eks:az-poller
+    resourceVersion: "979824214"
+    uid: 6b9d8090-855b-4c4f-8fe1-00428952fa28
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:az-poller
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:az-poller
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:certificate-controller
+    resourceVersion: "979824234"
+    uid: 935ffcef-b005-4416-8ef8-05c03e3dc1c7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:controller:certificate-controller
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:certificate-controller
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:certificate-controller-approver
+    resourceVersion: "979824238"
+    uid: 96cd8d42-2cf7-4c2b-932c-c64fbbcd864e
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:certificate-controller-approver
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:certificate-controller
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2024-05-09T01:11:33Z"
+    name: eks:certificate-controller-manager
+    resourceVersion: "979824230"
+    uid: 53711efe-e49d-43ec-8495-a996d7b7a73a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:certificate-controller-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:certificate-controller
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2023-09-13T12:05:19Z"
+    name: eks:certificate-controller-signer
+    resourceVersion: "979824241"
+    uid: b3959543-83ef-4c61-b211-01840393fc21
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:certificate-controller-signer
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:certificate-controller
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:cloud-controller-manager
+    resourceVersion: "979824197"
+    uid: fbc57417-0645-472a-aff3-75d9e3f1e09b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:cloud-controller-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:cloud-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:cloud-provider-extraction-migration
+    resourceVersion: "979824330"
+    uid: 53ed8b95-718c-45bd-a656-a16b39d5a56c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:cloud-provider-extraction-migration
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: system:kube-controller-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:cloudwatch-agent-role-binding"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:cloudwatch-agent-role"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:cloudwatch-agent"}]}
+    creationTimestamp: "2023-07-17T09:45:30Z"
+    name: eks:cloudwatch-agent-role-binding
+    resourceVersion: "196767983"
+    uid: de7b9b32-82b2-4cb1-9607-aa5f768385bb
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:cloudwatch-agent-role
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:cloudwatch-agent
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:cluster-event-watcher
+    resourceVersion: "979824254"
+    uid: ce1ff6dc-43d7-4bbe-ad04-998e6a64114b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:cluster-event-watcher
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:cluster-event-watcher
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2024-05-26T05:01:48Z"
+    name: eks:coredns-autoscaler
+    resourceVersion: "979824263"
+    uid: c4945d35-9ab0-4fb0-8752-1d3a18df45c4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:coredns-autoscaler
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:coredns-autoscaler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:extension-metrics-apiserver"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:extension-metrics-apiserver"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:extension-metrics-apiserver"}]}
+    creationTimestamp: "2024-11-24T09:06:54Z"
+    name: eks:extension-metrics-apiserver
+    resourceVersion: "707001850"
+    uid: 6c4c0126-aeb2-44cc-975e-ff0daf853152
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:extension-metrics-apiserver
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:extension-metrics-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:extension-metrics-apiserver-auth-delegator"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"system:auth-delegator"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:extension-metrics-apiserver"}]}
+    creationTimestamp: "2024-11-24T09:06:54Z"
+    name: eks:extension-metrics-apiserver-auth-delegator
+    resourceVersion: "707001851"
+    uid: 2b553f97-aba5-45c2-9999-52eaafe22b84
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:auth-delegator
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:extension-metrics-apiserver
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:fargate-manager"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:fargate-manager"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:fargate-manager"}]}
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    name: eks:fargate-manager
+    resourceVersion: "278"
+    uid: 28b65dff-6cc2-48e3-8034-72f543093899
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:fargate-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:fargate-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:fargate-scheduler
+    resourceVersion: "979824275"
+    uid: b4010d4a-087f-448b-8cee-5e8e171e7ca7
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:fargate-scheduler
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:fargate-scheduler
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:k8s-metrics
+    resourceVersion: "979824288"
+    uid: 6fb04232-c6ad-45d1-a36d-b099327bef3b
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:k8s-metrics
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:k8s-metrics
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2024-12-22T18:46:04Z"
+    name: eks:kms-storage-migrator
+    resourceVersion: "979824294"
+    uid: f725986c-af59-4495-b8cb-e087e516ec16
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:kms-storage-migrator
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:kms-storage-migrator
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"eks.amazonaws.com/component":"kube-proxy","k8s-app":"kube-proxy"},"name":"eks:kube-proxy"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"system:node-proxier"},"subjects":[{"kind":"ServiceAccount","name":"kube-proxy","namespace":"kube-system"}]}
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    labels:
+      eks.amazonaws.com/component: kube-proxy
+      k8s-app: kube-proxy
+    name: eks:kube-proxy
+    resourceVersion: "829454966"
+    uid: fb1263c9-3076-4091-b31f-7442214aae3a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-proxier
+  subjects:
+  - kind: ServiceAccount
+    name: kube-proxy
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eks:kube-proxy-fargate"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"system:node-proxier"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"system:node-proxier"}]}
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    name: eks:kube-proxy-fargate
+    resourceVersion: "277"
+    uid: d461caee-28e1-43ca-b776-69d9870e20ba
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-proxier
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:node-proxier
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"eks.amazonaws.com/component":"kube-proxy","k8s-app":"kube-proxy"},"name":"eks:kube-proxy-windows"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"system:node-proxier"},"subjects":[{"kind":"Group","name":"eks:kube-proxy-windows"}]}
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    labels:
+      eks.amazonaws.com/component: kube-proxy
+      k8s-app: kube-proxy
+    name: eks:kube-proxy-windows
+    resourceVersion: "274"
+    uid: 250dfa30-98fd-4d8b-8a86-f83c08d6c5b8
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: system:node-proxier
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: eks:kube-proxy-windows
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"rbac","app.kubernetes.io/created-by":"amazon-network-policy-controller-k8s","app.kubernetes.io/instance":"manager-rolebinding","app.kubernetes.io/name":"amazon-network-policy-controller-k8s","app.kubernetes.io/part-of":"amazon-network-policy-controller-k8s"},"name":"eks:network-policy-controller"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:network-policy-controller"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"User","name":"eks:network-policy-controller"}]}
+    creationTimestamp: "2023-09-28T09:34:42Z"
+    labels:
+      app.kubernetes.io/component: rbac
+      app.kubernetes.io/created-by: amazon-network-policy-controller-k8s
+      app.kubernetes.io/instance: manager-rolebinding
+      app.kubernetes.io/name: amazon-network-policy-controller-k8s
+      app.kubernetes.io/part-of: amazon-network-policy-controller-k8s
+    name: eks:network-policy-controller
+    resourceVersion: "262285719"
+    uid: b9856924-382c-4578-9b8e-8eeddae8dbd4
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:network-policy-controller
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:network-policy-controller
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2024-11-24T09:06:54Z"
+    name: eks:network-webhooks
+    resourceVersion: "979824300"
+    uid: 879f6633-006b-4d66-98a7-23fd0eff5859
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:network-webhooks
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:network-webhooks
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"eks.amazonaws.com/component":"node"},"name":"eks:node-bootstrapper"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:node-bootstrapper"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"system:bootstrappers"},{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"system:nodes"}]}
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    labels:
+      eks.amazonaws.com/component: node
+    name: eks:node-bootstrapper
+    resourceVersion: "285"
+    uid: 95b5744c-a3ef-450e-9795-334a1b1abd74
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:node-bootstrapper
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:bootstrappers
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:nodes
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    name: eks:node-manager
+    resourceVersion: "979824186"
+    uid: 15c7e576-9f57-44e0-b41a-1525815f8bd2
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:node-manager
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:node-manager
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:nodewatcher
+    resourceVersion: "979824306"
+    uid: 61f7bcb2-adfc-46f1-a914-56e85eca735a
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:nodewatcher
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:nodewatcher
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:pod-identity-mutating-webhook
+    resourceVersion: "979824312"
+    uid: 09a7b76e-3f6c-4e94-8a01-008357c5904c
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:pod-identity-mutating-webhook
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: eks:pod-identity-mutating-webhook
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{"kubernetes.io/description":"Allow all authenticated users to create privileged pods."},"labels":{"eks.amazonaws.com/component":"pod-security-policy","kubernetes.io/cluster-service":"true"},"name":"eks:podsecuritypolicy:authenticated"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"eks:podsecuritypolicy:privileged"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"system:authenticated"}]}
+      kubernetes.io/description: Allow all authenticated users to create privileged
+        pods.
+    creationTimestamp: "2022-08-09T11:46:59Z"
+    labels:
+      eks.amazonaws.com/component: pod-security-policy
+      kubernetes.io/cluster-service: "true"
+    name: eks:podsecuritypolicy:authenticated
+    resourceVersion: "289"
+    uid: 38c72dee-46c7-4708-b176-1d2acfc5ac5f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:podsecuritypolicy:privileged
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: system:authenticated
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2023-06-28T07:31:18Z"
+    name: eks:service-operations
+    resourceVersion: "979824320"
+    uid: dcc583ee-4388-437e-b171-898db89c043f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:service-operations
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: eks:service-operations
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    creationTimestamp: "2022-08-09T11:46:55Z"
+    name: eks:tagging-controller
+    resourceVersion: "979824339"
+    uid: 7a71a8fd-8b2d-4650-8889-a3e5bce3c9a1
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: eks:tagging-controller
+  subjects:
+  - kind: ServiceAccount
+    name: tagging-controller
+    namespace: kube-system
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eksread"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"view"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"eksreadgroup"}]}
+    creationTimestamp: "2023-05-10T04:55:37Z"
+    name: eksread
+    resourceVersion: "132878260"
+    uid: 219e720e-d904-40da-9328-9d98ce57d489
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: view
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: eksreadgroup
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eksreadwrite"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"edit"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"eksreadwritegroup"}]}
+    creationTimestamp: "2023-05-10T04:55:37Z"
+    name: eksreadwrite
+    resourceVersion: "132878269"
+    uid: 9775bb6f-81a0-40f6-a3df-154219e97272
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: edit
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: eksreadwritegroup
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{"meta.helm.sh/release-name":"events-to-opensearch","meta.helm.sh/release-namespace":"opensearch-exporter"},"labels":{"app.kubernetes.io/instance":"kubernetes-events-exporter-na-prd-spark","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"kubernetes-event-exporter","app.kubernetes.io/version":"1.7.0","helm.sh/chart":"kubernetes-event-exporter-3.3.0"},"name":"events-to-opensearch-kubernetes-event-exporter-opensearch-expo"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"events-to-opensearch-kubernetes-event-exporter-opensearch-expo"},"subjects":[{"kind":"ServiceAccount","name":"events-to-opensearch-kubernetes-event-exporter","namespace":"kubernetes-event-exporter"}]}
+      meta.helm.sh/release-name: events-to-opensearch
+      meta.helm.sh/release-namespace: opensearch-exporter
+    creationTimestamp: "2025-01-16T05:49:06Z"
+    labels:
+      app.kubernetes.io/instance: kubernetes-events-exporter-na-prd-spark
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: kubernetes-event-exporter
+      app.kubernetes.io/version: 1.7.0
+      helm.sh/chart: kubernetes-event-exporter-3.3.0
+    name: events-to-opensearch-kubernetes-event-exporter-opensearch-expo
+    resourceVersion: "760305587"
+    uid: 94ff3fcb-18b8-4db3-94d1-85f3108bb75f
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: events-to-opensearch-kubernetes-event-exporter-opensearch-expo
+  subjects:
+  - kind: ServiceAccount
+    name: events-to-opensearch-kubernetes-event-exporter
+    namespace: kubernetes-event-exporter
