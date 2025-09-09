@@ -1,5 +1,12 @@
-{
-    "UserId": "AROA4ECI763XXQNUM3MRP:daya.8",
-    "Account": "833376745199",
-    "Arn": "arn:aws:sts::833376745199:assumed-role/RBAC_SCOP_PRD_DEVOPS/daya.8"
-}
+ kubectl describe clusterrolebinding eksreadwrite
+
+Name:         eksreadwrite
+Labels:       <none>
+Annotations:  <none>
+Role:
+  Kind:  ClusterRole
+  Name:  edit
+Subjects:
+  Kind   Name               Namespace
+  ----   ----               ---------
+  Group  eksreadwritegroup
