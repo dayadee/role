@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+  kind: ClusterRoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eksreadwrite"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"edit"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"eksreadwritegroup"}]}
+    creationTimestamp: "2023-05-10T04:55:37Z"
+    name: eksreadwrite
+    resourceVersion: "132878269"
+    uid: 9775bb6f-81a0-40f6-a3df-154219e97272
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: edit
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: Group
+    name: eksreadwritegroup
