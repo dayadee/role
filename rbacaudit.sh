@@ -1,10 +1,11 @@
 #!/bin/bash
 
-output_file="rbac_combined_audit_safe.csv"
+output_file="rbac_combined_safe.csv"
 echo "Kind,Namespace,Name,RoleRefKind,RoleRefName,SubjectKind,SubjectName,Verb,Resource,Source" > $output_file
 
 declare -A counts
 
+# Detect deployment source
 detect_source() {
   local labels="$1"
   local annotations="$2"
@@ -24,6 +25,7 @@ detect_source() {
   fi
 }
 
+# Expand rules into verb + resource
 expand_rules() {
   local rules="$1"
   [[ -z "$rules" || "$rules" == "null" || "$rules" == "[]" ]] && return
@@ -38,6 +40,7 @@ expand_rules() {
   done
 }
 
+# Process Roles / ClusterRoles
 process_roles() {
   local kind=$1
   local items
@@ -50,7 +53,8 @@ process_roles() {
     name=$(echo $data | jq -r '.metadata.name // ""')
     rules=$(echo $data | jq -c '.rules // []')
     [[ "$rules" == "[]" ]] && continue
-    manager=$(echo $data | jq -r '.metadata.managedFields // [] | .[].manager // ""' | tr '\n' ',' | sed 's/,$//')
+    # Safe managedFields extraction
+    manager=$(echo "$data" | jq -r 'if .metadata.managedFields? then [.metadata.managedFields[].manager] | join(",") else "" end')
     labels=$(echo $data | jq -r '.metadata.labels // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
     annotations=$(echo $data | jq -r '.metadata.annotations // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
     source=$(detect_source "$labels" "$annotations" "$manager")
@@ -62,6 +66,7 @@ process_roles() {
   done
 }
 
+# Process RoleBindings / ClusterRoleBindings
 process_bindings() {
   local kind=$1
   local items
@@ -76,7 +81,7 @@ process_bindings() {
     roleRefName=$(echo $data | jq -r '.roleRef.name // ""')
     subjects=$(echo $data | jq -c '.subjects // []')
     [[ "$subjects" == "[]" ]] && return
-    manager=$(echo $data | jq -r '.metadata.managedFields // [] | .[].manager // ""' | tr '\n' ',' | sed 's/,$//')
+    manager=$(echo "$data" | jq -r 'if .metadata.managedFields? then [.metadata.managedFields[].manager] | join(",") else "" end')
     labels=$(echo $data | jq -r '.metadata.labels // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
     annotations=$(echo $data | jq -r '.metadata.annotations // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
     source=$(detect_source "$labels" "$annotations" "$manager")
@@ -102,4 +107,4 @@ for key in "${!counts[@]}"; do
   echo "$key,${counts[$key]}"
 done | sort -t',' -k2 -nr
 
-echo -e "\n📂 Combined safe RBAC audit CSV: $output_file"
+echo -e "\n📂 Fully safe combined RBAC audit CSV: $output_file"
