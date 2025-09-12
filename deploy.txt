@@ -1,0 +1,20 @@
+k get clusterrolebindings.rbac.authorization.k8s.io eksreadwrite -o yaml                          ✔  PRD-EKS-Spark 󱃾  test@daya8  08:54:14   
+❯ k get clusterrolebindings.rbac.authorization.k8s.io eksreadwrite -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"name":"eksreadwrite"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"edit"},"subjects":[{"apiGroup":"rbac.authorization.k8s.io","kind":"Group","name":"eksreadwritegroup"}]}
+  creationTimestamp: "2023-05-10T21:55:40Z"
+  name: eksreadwrite
+  resourceVersion: "65501209"
+  uid: 8bde71f0-34d6-4e76-933c-717e94a16ad5
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: eksreadwritegroup
