@@ -1,5 +1,13 @@
-❯ ./rbac_audit.sh
-=== Summary ===
 
-📂 Fully safe combined RBAC audit CSV: rbac_combined_safe.csv
-❯ cat rbac_combined_audit.csv
+./rbac_audit_combined.sh: line 95: counts_namespace["$ns"]: bad array subscript
+./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
+./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
+./rbac_audit_combined.sh: line 95: counts_namespace["$ns"]: bad array subscript
+./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
+./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
+./rbac_audit_combined.sh: line 95: counts_namespace["$ns"]: bad array subscript
+=== Summary by Source ===
+
+=== Summary by Namespace ===
+
+📂 Combined RBAC audit CSV: rbac_combined_summary.csv
