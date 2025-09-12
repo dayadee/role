@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output_file="rbac_combined_summary.csv"
+output_file="rbac_combined_summary_fixed.csv"
 echo "Kind,Namespace,Name,RoleRefKind,RoleRefName,SubjectKind,SubjectName,Verb,Resource,Source" > $output_file
 
 declare -A counts_source
@@ -51,6 +51,7 @@ process_roles() {
   echo "$items" | jq -r '.items[] | @base64' | while read item; do
     data=$(echo $item | base64 -d)
     ns=$(echo $data | jq -r '.metadata.namespace // ""')
+    [[ -z "$ns" ]] && ns="<cluster-wide>"
     name=$(echo $data | jq -r '.metadata.name // ""')
     rules=$(echo $data | jq -c '.rules // []')
     [[ "$rules" == "[]" ]] && continue
@@ -77,6 +78,7 @@ process_bindings() {
   echo "$items" | jq -r '.items[] | @base64' | while read item; do
     data=$(echo $item | base64 -d)
     ns=$(echo $data | jq -r '.metadata.namespace // ""')
+    [[ -z "$ns" ]] && ns="<cluster-wide>"
     name=$(echo $data | jq -r '.metadata.name // ""')
     roleRefKind=$(echo $data | jq -r '.roleRef.kind // ""')
     roleRefName=$(echo $data | jq -r '.roleRef.name // ""')
@@ -112,8 +114,7 @@ done | sort -t',' -k2 -nr
 # Print summary by namespace
 echo -e "\n=== Summary by Namespace ==="
 for key in "${!counts_namespace[@]}"; do
-  ns_display=$([[ -z "$key" ]] && echo "<cluster-wide>" || echo "$key")
-  echo "$ns_display,${counts_namespace[$key]}"
+  echo "$key,${counts_namespace[$key]}"
 done | sort -t',' -k2 -nr
 
 echo -e "\n📂 Combined RBAC audit CSV: $output_file"
