@@ -1,10 +1,6 @@
 jq: error (at <stdin>:1): Cannot iterate over null (null)
 jq: error (at <stdin>:1): Cannot iterate over null (null)
 jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): null (null) has no keys
-=== Summary (before details) ===
-=== Summary (after details) ===
+=== Summary ===
+
+📂 Combined RBAC audit CSV: rbac_combined_audit.csv
