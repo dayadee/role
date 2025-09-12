@@ -1,6 +1,5 @@
-jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): Cannot iterate over null (null)
-jq: error (at <stdin>:1): Cannot iterate over null (null)
+❯ ./rbac_audit.sh
 === Summary ===
 
-📂 Combined RBAC audit CSV: rbac_combined_audit.csv
+📂 Fully safe combined RBAC audit CSV: rbac_combined_safe.csv
+❯ cat rbac_combined_audit.csv
