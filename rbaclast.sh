@@ -1,0 +1,122 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+output_file="rbac_combined_summary_working.csv"
+echo "Kind,Namespace,Name,RoleRefKind,RoleRefName,SubjectKind,SubjectName,Verb,Resource,Source" > $output_file
+
+declare -A counts_source
+declare -A counts_namespace
+
+# Detect deployment source
+detect_source() {
+  local labels="$1"
+  local annotations="$2"
+  local manager="$3"
+  if [[ $labels == *"helm"* || $annotations == *"helm"* || $manager == *"helm"* ]]; then
+    echo "Helm"
+  elif [[ $labels == *"argocd"* || $annotations == *"argocd"* || $manager == *"argocd"* ]]; then
+    echo "ArgoCD"
+  elif [[ $labels == *"flux"* || $annotations == *"flux"* || $manager == *"flux"* ]]; then
+    echo "Flux"
+  elif [[ $labels == *"terraform"* || $annotations == *"terraform"* || $manager == *"Terraform"* ]]; then
+    echo "Terraform"
+  elif [[ $manager == *"kubectl"* || $annotations == *"kubectl.kubernetes.io/last-applied-configuration"* ]]; then
+    echo "kubectl (manual apply)"
+  else
+    echo "Unknown"
+  fi
+}
+
+# Expand rules into verb + resource
+expand_rules() {
+  local rules="$1"
+  [[ -z "$rules" || "$rules" == "null" || "$rules" == "[]" ]] && return
+  echo "$rules" | jq -c '.[]' | while read -r rule; do
+    verbs=$(echo "$rule" | jq -r '.verbs // [] | .[]')
+    resources=$(echo "$rule" | jq -r '.resources // [] | .[]')
+    for v in $verbs; do
+      for r in $resources; do
+        echo "$v,$r"
+      done
+    done
+  done
+}
+
+# Process Roles / ClusterRoles
+process_roles() {
+  local kind=$1
+  local items
+  [[ $kind == "role" ]] && items=$(kubectl get role --all-namespaces -o json) || items=$(kubectl get clusterrole -o json)
+  [[ $(echo "$items" | jq '.items | length') -eq 0 ]] && return
+
+  while read -r item; do
+    data=$(echo "$item" | base64 -d)
+    ns=$(echo "$data" | jq -r '.metadata.namespace // ""')
+    [[ -z "$ns" ]] && ns="<cluster-wide>"
+    name=$(echo "$data" | jq -r '.metadata.name // ""')
+    rules=$(echo "$data" | jq -c '.rules // []')
+    [[ "$rules" == "[]" ]] && continue
+    manager=$(echo "$data" | jq -r 'if .metadata.managedFields? then [.metadata.managedFields[].manager] | join(",") else "" end')
+    labels=$(echo "$data" | jq -r '.metadata.labels // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    annotations=$(echo "$data" | jq -r '.metadata.annotations // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    source=$(detect_source "$labels" "$annotations" "$manager")
+
+    while IFS=',' read -r verb resource; do
+      echo "$kind,$ns,$name,,,,,$verb,$resource,$source" >> "$output_file"
+      counts_source["$source"]=$((counts_source["$source"]+1))
+      counts_namespace["$ns"]=$((counts_namespace["$ns"]+1))
+    done < <(expand_rules "$rules")
+  done < <(echo "$items" | jq -r '.items[] | @base64')
+}
+
+# Process RoleBindings / ClusterRoleBindings
+process_bindings() {
+  local kind=$1
+  local items
+  [[ $kind == "rolebinding" ]] && items=$(kubectl get rolebinding --all-namespaces -o json) || items=$(kubectl get clusterrolebinding -o json)
+  [[ $(echo "$items" | jq '.items | length') -eq 0 ]] && return
+
+  while read -r item; do
+    data=$(echo "$item" | base64 -d)
+    ns=$(echo "$data" | jq -r '.metadata.namespace // ""')
+    [[ -z "$ns" ]] && ns="<cluster-wide>"
+    name=$(echo "$data" | jq -r '.metadata.name // ""')
+    roleRefKind=$(echo "$data" | jq -r '.roleRef.kind // ""')
+    roleRefName=$(echo "$data" | jq -r '.roleRef.name // ""')
+    subjects=$(echo "$data" | jq -c '.subjects // []')
+    [[ "$subjects" == "[]" ]] && continue
+    manager=$(echo "$data" | jq -r 'if .metadata.managedFields? then [.metadata.managedFields[].manager] | join(",") else "" end')
+    labels=$(echo "$data" | jq -r '.metadata.labels // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    annotations=$(echo "$data" | jq -r '.metadata.annotations // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    source=$(detect_source "$labels" "$annotations" "$manager")
+
+    while read -r subj; do
+      subjKind=$(echo "$subj" | jq -r '.kind // "NoSubject"')
+      subjName=$(echo "$subj" | jq -r '.name // ""')
+      echo "$kind,$ns,$name,$roleRefKind,$roleRefName,$subjKind,$subjName,,,,$source" >> "$output_file"
+      counts_source["$source"]=$((counts_source["$source"]+1))
+      counts_namespace["$ns"]=$((counts_namespace["$ns"]+1))
+    done < <(echo "$subjects" | jq -c '.[]')
+  done < <(echo "$items" | jq -r '.items[] | @base64')
+}
+
+# Run collectors
+process_roles "role"
+process_roles "clusterrole"
+process_bindings "rolebinding"
+process_bindings "clusterrolebinding"
+
+# Print summary by source
+echo "=== Summary by Source ==="
+for key in "${!counts_source[@]}"; do
+  echo "$key,${counts_source[$key]}"
+done | sort -t',' -k2 -nr
+
+# Print summary by namespace
+echo -e "\n=== Summary by Namespace ==="
+for key in "${!counts_namespace[@]}"; do
+  echo "$key,${counts_namespace[$key]}"
+done | sort -t',' -k2 -nr
+
+echo -e "\n📂 Combined RBAC audit CSV: $output_file"
