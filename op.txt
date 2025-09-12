@@ -1,13 +1,89 @@
-
-./rbac_audit_combined.sh: line 95: counts_namespace["$ns"]: bad array subscript
-./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
-./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
-./rbac_audit_combined.sh: line 95: counts_namespace["$ns"]: bad array subscript
-./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
-./rbac_audit_combined.sh: line 95: counts_namespace[]: bad array subscript
-./rbac_audit_combined.sh: line 95: counts_namespace["$ns"]: bad array subscript
-=== Summary by Source ===
-
-=== Summary by Namespace ===
-
-📂 Combined RBAC audit CSV: rbac_combined_summary.csv
+kubectl get pods -n flink
+NAME                                                READY   STATUS      RESTARTS   AGE
+debug-liextractor-jm-bdf8c7dbd-sbjnw                1/1     Running     0          149d
+debug-liextractor-tm-b8b9655b7-vr7f9                1/1     Running     0          27d
+debug-res-ce-jm-5c9b79fb6b-vtt4s                    1/1     Running     0          149d
+debug-res-ce-tm-fbc5fb87f-7gn2n                     1/1     Running     0          27d
+liextractor-jm-564c5b85c4-75dgz                     1/1     Running     0          50d
+liextractor-tm-7c6cdcf985-74j56                     1/1     Running     0          20d
+liextractor-tm-7c6cdcf985-8rzns                     1/1     Running     0          27d
+liextractor-tm-7c6cdcf985-c5mn7                     1/1     Running     0          20d
+liextractor-tm-7c6cdcf985-cqgg6                     1/1     Running     0          27d
+liextractor-tm-7c6cdcf985-d978f                     1/1     Running     0          27d
+liextractor-tm-7c6cdcf985-dz7rg                     1/1     Running     0          27d
+liextractor-tm-7c6cdcf985-mhb6v                     1/1     Running     0          20d
+liextractor-tm-7c6cdcf985-mp2kq                     1/1     Running     0          27d
+liextractor-tm-7c6cdcf985-sd8l9                     1/1     Running     0          27d
+liextractor-tm-7c6cdcf985-zmtdj                     1/1     Running     0          27d
+res-appusage-jm-98c44bccd-hfxww                     1/1     Running     0          149d
+res-appusage-tm-5f79d9d74c-h4pnp                    1/1     Running     0          29d
+res-appusage-tm-5f79d9d74c-jtjhk                    1/1     Running     0          20d
+res-appusage-tm-5f79d9d74c-t525p                    1/1     Running     0          27d
+res-appusage-tm-5f79d9d74c-znphf                    1/1     Running     0          20d
+res-ce-jm-f496d88bb-7v775                           1/1     Running     0          133d
+res-ce-tm-6d4664d6b7-968zt                          1/1     Running     0          20d
+res-ce-tm-6d4664d6b7-9f4lx                          1/1     Running     0          20d
+res-ce-tm-6d4664d6b7-ktzxd                          1/1     Running     0          20d
+res-ce-tm-6d4664d6b7-vn84m                          1/1     Running     0          20d
+s3-sink-log-type-content-deployer-job-l2wp7         0/1     Completed   0          149d
+s3-sink-log-type-content-jm-58b8d5cc9c-bfdd6        1/1     Running     0          149d
+s3-sink-log-type-content-tm-59767bd6b-kvhwm         1/1     Running     0          27d
+s3-sink-log-type-content-tm-59767bd6b-qxxtl         1/1     Running     0          27d
+s3-sink-log-type-content-tm-59767bd6b-txt6m         1/1     Running     0          27d
+s3-sink-log-type-content-tm-59767bd6b-xtqmq         1/1     Running     0          27d
+s3-sink-log-type-event-deployer-job-k6tr7           0/1     Completed   0          149d
+s3-sink-log-type-event-jm-9c54fcbdc-drvsk           1/1     Running     0          149d
+s3-sink-log-type-event-tm-7cd7cc9766-6s58z          1/1     Running     0          29d
+s3-sink-log-type-input-source-deployer-job-s6t8p    0/1     Completed   0          149d
+s3-sink-log-type-input-source-jm-84bc4b685f-4wf8w   1/1     Running     0          149d
+s3-sink-log-type-input-source-tm-775799866d-hzsb4   1/1     Running     0          27d
+s3-sink-log-type-version-deployer-job-g5rn8         0/1     Completed   0          149d
+s3-sink-log-type-version-jm-b4bfd74cf-mdsfq         1/1     Running     0          149d
+s3-sink-log-type-version-tm-66bbc448db-4zccj        1/1     Running     0          27d
+sta-12-jm-784cdf9cf4-zllbb                          1/1     Running     0          224d
+sta-12-tm-59f4f4698f-9n9fn                          1/1     Running     0          21d
+sta-13-jm-677766755d-cc5km                          1/1     Running     0          224d
+sta-13-tm-5556d9d7c7-nnmq4                          1/1     Running     0          163d
+sta-14-jm-5dc879f754-kvp54                          1/1     Running     0          224d
+sta-14-tm-89d68f84c-pnfcj                           1/1     Running     0          163d
+sta-15-jm-6b6d6b4ddb-6rxq5                          1/1     Running     0          224d
+sta-15-tm-57567d659c-44bqj                          1/1     Running     0          163d
+sta-4-jm-7fd8f7588d-fpk9w                           1/1     Running     0          224d
+sta-4-tm-74cc5d74b5-n9r68                           1/1     Running     0          163d
+sta-4-tm-74cc5d74b5-x9jbb                           1/1     Running     0          163d
+sta-5-jm-86d5f864fd-brxjs                           1/1     Running     0          224d
+sta-5-tm-69c8476b4f-9vl6c                           1/1     Running     0          163d
+sta-5-tm-69c8476b4f-gc8mt                           1/1     Running     0          163d
+sta-6-jm-7c649d5bc6-lgrw4                           1/1     Running     0          224d
+sta-6-tm-cb4cb45cc-2rmnn                            1/1     Running     0          163d
+sta-6-tm-cb4cb45cc-dlfxb                            1/1     Running     0          163d
+❯ kubectl get svc -n flink
+NAME                                        TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                                                                      AGE
+debug-liextractor-jm                        NodePort   10.100.202.89    <none>        6123:31982/TCP,6124:32612/TCP,8081:30758/TCP,8888:31860/TCP,9249:30539/TCP   149d
+debug-res-ce-jm                             NodePort   10.100.117.145   <none>        6123:30149/TCP,6124:32659/TCP,8081:32331/TCP,8888:31770/TCP,9249:30122/TCP   149d
+hdmi-session-jm                             NodePort   10.100.24.58     <none>        6123:32021/TCP,6124:32690/TCP,8081:30461/TCP,8888:31106/TCP,9249:32625/TCP   694d
+liextractor-jm                              NodePort   10.100.155.160   <none>        6123:31256/TCP,6124:31793/TCP,8081:31926/TCP,8888:30984/TCP,9249:31311/TCP   50d
+res-appusage-jm                             NodePort   10.100.159.21    <none>        6123:31082/TCP,6124:30897/TCP,8081:31566/TCP,8888:30933/TCP,9249:31053/TCP   149d
+res-ce-jm                                   NodePort   10.100.21.8      <none>        6123:30181/TCP,6124:32225/TCP,8081:30480/TCP,8888:30971/TCP,9249:32400/TCP   133d
+s3-sink-log-type-content-jm                 NodePort   10.100.167.162   <none>        6123:30384/TCP,6124:31794/TCP,8081:30338/TCP,8888:30647/TCP,9249:30919/TCP   149d
+s3-sink-log-type-content-original-jm        NodePort   10.100.107.143   <none>        6123:31920/TCP,6124:31467/TCP,8081:30646/TCP,8888:31993/TCP,9249:31769/TCP   694d
+s3-sink-log-type-event-jm                   NodePort   10.100.215.244   <none>        6123:32139/TCP,6124:32253/TCP,8081:31148/TCP,8888:30321/TCP,9249:30565/TCP   149d
+s3-sink-log-type-event-original-jm          NodePort   10.100.207.48    <none>        6123:32089/TCP,6124:31820/TCP,8081:32442/TCP,8888:32530/TCP,9249:31162/TCP   694d
+s3-sink-log-type-input-source-jm            NodePort   10.100.63.82     <none>        6123:31967/TCP,6124:30792/TCP,8081:30155/TCP,8888:31612/TCP,9249:30197/TCP   149d
+s3-sink-log-type-input-source-original-jm   NodePort   10.100.167.210   <none>        6123:31678/TCP,6124:32565/TCP,8081:31468/TCP,8888:31255/TCP,9249:32685/TCP   694d
+s3-sink-log-type-version-jm                 NodePort   10.100.40.231    <none>        6123:32048/TCP,6124:31095/TCP,8081:30590/TCP,8888:31205/TCP,9249:31705/TCP   149d
+s3-sink-log-type-version-original-jm        NodePort   10.100.180.116   <none>        6123:30075/TCP,6124:32156/TCP,8081:32557/TCP,8888:30643/TCP,9249:32117/TCP   694d
+sta-1-jm                                    NodePort   10.100.80.198    <none>        6123:30513/TCP,6124:32153/TCP,8081:30857/TCP,8888:30511/TCP,9249:31638/TCP   2y105d
+sta-10-jm                                   NodePort   10.100.96.54     <none>        6123:31712/TCP,6124:31704/TCP,8081:30295/TCP,8888:31191/TCP,9249:30214/TCP   694d
+sta-11-jm                                   NodePort   10.100.129.154   <none>        6123:30625/TCP,6124:30667/TCP,8081:31117/TCP,8888:30109/TCP,9249:31825/TCP   694d
+sta-12-jm                                   NodePort   10.100.22.23     <none>        6123:31547/TCP,6124:32178/TCP,8081:30434/TCP,8888:32046/TCP,9249:30974/TCP   224d
+sta-13-jm                                   NodePort   10.100.69.216    <none>        6123:30488/TCP,6124:30598/TCP,8081:32196/TCP,8888:31548/TCP,9249:30584/TCP   224d
+sta-14-jm                                   NodePort   10.100.177.101   <none>        6123:31022/TCP,6124:31843/TCP,8081:32441/TCP,8888:31799/TCP,9249:31969/TCP   224d
+sta-15-jm                                   NodePort   10.100.62.50     <none>        6123:31673/TCP,6124:30942/TCP,8081:31944/TCP,8888:30308/TCP,9249:30561/TCP   224d
+sta-3-jm                                    NodePort   10.100.92.80     <none>        6123:31546/TCP,6124:30642/TCP,8081:32491/TCP,8888:30017/TCP,9249:30731/TCP   694d
+sta-4-jm                                    NodePort   10.100.218.72    <none>        6123:31934/TCP,6124:31377/TCP,8081:31093/TCP,8888:31841/TCP,9249:32518/TCP   224d
+sta-5-jm                                    NodePort   10.100.95.4      <none>        6123:31990/TCP,6124:32610/TCP,8081:32374/TCP,8888:31146/TCP,9249:30921/TCP   224d
+sta-6-jm                                    NodePort   10.100.36.182    <none>        6123:32628/TCP,6124:31706/TCP,8081:32114/TCP,8888:32327/TCP,9249:32720/TCP   224d
+sta-7-jm                                    NodePort   10.100.114.149   <none>        6123:31138/TCP,6124:31986/TCP,8081:32572/TCP,8888:32115/TCP,9249:31964/TCP   694d
+sta-8-jm                                    NodePort   10.100.124.255   <none>        6123:31511/TCP,6124:32604/TCP,8081:30887/TCP,8888:31629/TCP,9249:32326/TCP   694d
+sta-9-jm                                    NodePort   10.100.123.46    <none>        6123:31033/TCP,6124:31103/TCP,8081:31126/TCP,8888:32543/TCP,9249:30903/TCP   694d
