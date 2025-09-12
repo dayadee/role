@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output_file="rbac_combined_audit.csv"
+output_file="rbac_combined_audit_safe.csv"
 echo "Kind,Namespace,Name,RoleRefKind,RoleRefName,SubjectKind,SubjectName,Verb,Resource,Source" > $output_file
 
 declare -A counts
@@ -26,31 +26,23 @@ detect_source() {
 
 expand_rules() {
   local rules="$1"
-  if [[ -z "$rules" || "$rules" == "null" || "$rules" == "[]" ]]; then
-    return
-  else
-    echo "$rules" | jq -c '.[]' | while read rule; do
-      verbs=$(echo $rule | jq -r '.verbs[]? // empty')
-      resources=$(echo $rule | jq -r '.resources[]? // empty')
-      for v in $verbs; do
-        for r in $resources; do
-          echo "$v,$r"
-        done
+  [[ -z "$rules" || "$rules" == "null" || "$rules" == "[]" ]] && return
+  echo "$rules" | jq -c '.[]' | while read rule; do
+    verbs=$(echo $rule | jq -r '.verbs // [] | .[]')
+    resources=$(echo $rule | jq -r '.resources // [] | .[]')
+    for v in $verbs; do
+      for r in $resources; do
+        echo "$v,$r"
       done
     done
-  fi
+  done
 }
 
 process_roles() {
   local kind=$1
   local items
-  if [[ $kind == "role" ]]; then
-    items=$(kubectl get role --all-namespaces -o json)
-  else
-    items=$(kubectl get clusterrole -o json)
-  fi
-  count=$(echo "$items" | jq '.items | length')
-  [[ $count -eq 0 ]] && return
+  [[ $kind == "role" ]] && items=$(kubectl get role --all-namespaces -o json) || items=$(kubectl get clusterrole -o json)
+  [[ $(echo "$items" | jq '.items | length') -eq 0 ]] && return
 
   echo "$items" | jq -r '.items[] | @base64' | while read item; do
     data=$(echo $item | base64 -d)
@@ -58,9 +50,9 @@ process_roles() {
     name=$(echo $data | jq -r '.metadata.name // ""')
     rules=$(echo $data | jq -c '.rules // []')
     [[ "$rules" == "[]" ]] && continue
-    manager=$(echo $data | jq -r '.metadata.managedFields[].manager? // empty' | tr '\n' ',' | sed 's/,$//')
-    labels=$(echo $data | jq -r '.metadata.labels | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
-    annotations=$(echo $data | jq -r '.metadata.annotations | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    manager=$(echo $data | jq -r '.metadata.managedFields // [] | .[].manager // ""' | tr '\n' ',' | sed 's/,$//')
+    labels=$(echo $data | jq -r '.metadata.labels // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    annotations=$(echo $data | jq -r '.metadata.annotations // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
     source=$(detect_source "$labels" "$annotations" "$manager")
 
     expand_rules "$rules" | while IFS=',' read verb resource; do
@@ -73,13 +65,8 @@ process_roles() {
 process_bindings() {
   local kind=$1
   local items
-  if [[ $kind == "rolebinding" ]]; then
-    items=$(kubectl get rolebinding --all-namespaces -o json)
-  else
-    items=$(kubectl get clusterrolebinding -o json)
-  fi
-  count=$(echo "$items" | jq '.items | length')
-  [[ $count -eq 0 ]] && return
+  [[ $kind == "rolebinding" ]] && items=$(kubectl get rolebinding --all-namespaces -o json) || items=$(kubectl get clusterrolebinding -o json)
+  [[ $(echo "$items" | jq '.items | length') -eq 0 ]] && return
 
   echo "$items" | jq -r '.items[] | @base64' | while read item; do
     data=$(echo $item | base64 -d)
@@ -89,9 +76,9 @@ process_bindings() {
     roleRefName=$(echo $data | jq -r '.roleRef.name // ""')
     subjects=$(echo $data | jq -c '.subjects // []')
     [[ "$subjects" == "[]" ]] && return
-    manager=$(echo $data | jq -r '.metadata.managedFields[].manager? // empty' | tr '\n' ',' | sed 's/,$//')
-    labels=$(echo $data | jq -r '.metadata.labels | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
-    annotations=$(echo $data | jq -r '.metadata.annotations | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    manager=$(echo $data | jq -r '.metadata.managedFields // [] | .[].manager // ""' | tr '\n' ',' | sed 's/,$//')
+    labels=$(echo $data | jq -r '.metadata.labels // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
+    annotations=$(echo $data | jq -r '.metadata.annotations // {} | to_entries[]? | "\(.key)=\(.value)"' | tr '\n' ',' | sed 's/,$//')
     source=$(detect_source "$labels" "$annotations" "$manager")
 
     echo "$subjects" | jq -c '.[]' | while read subj; do
@@ -115,4 +102,4 @@ for key in "${!counts[@]}"; do
   echo "$key,${counts[$key]}"
 done | sort -t',' -k2 -nr
 
-echo -e "\n📂 Combined RBAC audit CSV: $output_file"
+echo -e "\n📂 Combined safe RBAC audit CSV: $output_file"
